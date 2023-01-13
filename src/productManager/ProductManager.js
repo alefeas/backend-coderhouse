@@ -1,5 +1,4 @@
 const fs = require("fs/promises")
-
 class ProductManager {
     constructor(path) {
     this.path = path;
@@ -62,7 +61,6 @@ class ProductManager {
     return filteredProducts;
     }
 
-  // CART
     async createCart() {
     let cart = await this.getProducts()
     const newCart = { id: cart.length + 1, products: [] }
