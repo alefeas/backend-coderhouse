@@ -1,0 +1,18 @@
+<div>
+    <h1 class="main-title">Our products</h1>
+    <button id="see-cart-button" onclick="seeCart(event)">See Cart</button>
+    <div id="product-list-container">
+        {{#each products}}
+            <div class="product-item" id={{_id}} >
+                <p id="item-title">{{title}}</p>
+                <p>{{description}}</p>
+                <p class="price-tag">Price: ${{price}}</p>
+                    <div class="thumbnail-container">
+                        <img src="{{thumbnails}}" width="400px" alt="{{title}} image">
+                    </div>
+                <p class="stock-tag">Stock: {{stock}}</p>
+                <button id="add-to-cart-button" onclick=""><a href="/products/{{_id}}">View details</a></button>
+            </div>
+        {{/each}}
+    </div>
+</div>

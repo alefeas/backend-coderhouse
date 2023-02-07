@@ -1,0 +1,16 @@
+<h1>Cart</h1>
+<div id="{{cartId}}" class="cart-list">
+{{#if products}}
+    {{#each products}}
+        <div id={{product._id}} class="product-item">
+            <p>{{product.title}}</p>
+            <p>Price: ${{product.price}}</p>
+            <p>Amount: {{quantity}}</p>
+            <img src="{{product.thumbnails}}" alt="{{product.title}} image" srcset="">
+            <button onclick="removeProduct(event)">Remove</button>
+        </div>
+    {{/each}}
+{{else}}
+    <p>The cart is empty</p>
+{{/if}}
+</div>
