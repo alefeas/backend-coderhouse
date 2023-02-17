@@ -2,16 +2,35 @@ import express from "express"
 import { router as productRouter } from "./routes/products/products.routes.js"
 import { router as cartRouter } from "./routes/cart/cart.routes.js"
 import { router as viewsRouter } from "./routes/views/views.routes.js"
+import { router as sessionRouter } from "./routes/session/session.routes.js"
 import __dirname from "../src/utils.js"
 import handlebars from "express-handlebars"
 import { Server } from "socket.io"
 import "./config/dbConfig.js"
+import session from "express-session"
+import MongoStore from "connect-mongo"
+import path from "path"
 
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static("public"))
+app.use('/public', express.static(path.resolve(__dirname, '../public')))
+
+app.use(session({
+    name: 'session',
+    secret:'pw123' ,
+    cookie: {
+        httpOnly: true
+    },
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: "mongodb+srv://alefeas_:pwcoder123@alejo.uockjha.mongodb.net/coderDb?retryWrites=true&w=majority",
+        ttl: 3600
+    })
+}))
 
 const PORT = process.env.PORT || 8080
 
@@ -35,6 +54,7 @@ io.on('connection', (socket)=>{
 
 app.use("/api/products", productRouter)
 app.use("/api/carts", cartRouter)
+app.use("/session", sessionRouter)
 app.use('/', viewsRouter)
 
 app.engine('handlebars', handlebars.engine())
