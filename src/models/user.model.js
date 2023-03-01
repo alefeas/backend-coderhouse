@@ -3,26 +3,29 @@ import mongoose from "mongoose"
 const userCollection = 'users'
 
 const userSchema = new mongoose.Schema({
-    name: {
+    firstName: {
         type: String,
-        required: true
     },
     lastName: {
-        type: String,
-        required: true
+        type: String
     },
     age: {
-        type: Number,
-        required: true
+        type: Number
     },
     email:{
         type: String,
-        required: true,
         unique: true
     },
     password:{
+        type: String
+    },
+    gitHubLogin: {
         type: String,
-        required: true
+        unique: true
+    },
+    role: {
+        type: String,
+        default: 'user'
     }
 })
 

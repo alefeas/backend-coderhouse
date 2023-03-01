@@ -9,19 +9,28 @@ export const router = Router()
 const productService = new ProductMongoManager()
 const cartService = new CartManagerMongo()
 
-router.get('/', sessionMiddleware, (req, res)=>{
+router.get('/', sessionMiddleware, (req, res) => {
     res.redirect('/login')
 })
 
-router.get('/register', sessionMiddleware, (req, res)=>{
+router.get('/register', sessionMiddleware, (req, res) => {
     res.render('register', {
         title: 'Sing Up!',
     })
 })
 
-router.get('/login', sessionMiddleware, (req, res)=>{
+router.get('/login', sessionMiddleware, (req, res) => {
     res.render('login', {
         title: 'Login',
+    })
+})
+
+router.get('/profile', authMiddleware, (req, res) => {
+    const user = req.session.user
+
+    res.render('profile', {
+        title: 'Profile',
+        user: user
     })
 })
 
