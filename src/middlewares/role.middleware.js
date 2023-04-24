@@ -1,24 +1,25 @@
-export const roleMiddleware = async (req, res, next) => {
-    const { email, password } = req.body
-    if(email == "adminCoder@coder.com" && password == 'adminCod3r123'){
-        const sessionAdmin = {
-            firstName: 'admin',
-            lastName: 'Coder',
-            email: 'adminCoder@coder.com',
-            age: 15,
-            password: 'adminCod3r123',
-            role: 'admin'
-        }
-        req.session.user = sessionAdmin
-        req.session.save(err => {
-            if (err){
-                console.log('session error: ', err)
-            } 
-            else {
-                res.redirect('/products')
-            }
-        })
-    }else{
+import { HTTP_STATUS } from "../constants/api.constants.js"
+
+export const adminMiddleware = async (req, res, next) => {
+    if(req.user.role === "admin"){
         next()
     }
-};
+    else{
+        res.status(HTTP_STATUS.FORBIDDEN).json({
+            success: false,
+            message: 'Only admin can access this resource'
+        })
+    }
+}
+
+export const userMiddleware = async (req, res, next) => {
+    if(req.user.role === "user"){
+        next()
+    }
+    else{
+        res.status(HTTP_STATUS.FORBIDDEN).json({
+            success: false,
+            message: 'Only users can access this resource'
+        })
+    }
+}

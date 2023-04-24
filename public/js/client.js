@@ -1,6 +1,6 @@
 const logoutButton = document.getElementById('logout-button')
 
 logoutButton?.addEventListener('click', ()=>{
-    fetch('/session/logout')
+    fetch('/api/session/logout')
     .then(window.location.href = '/')
 })

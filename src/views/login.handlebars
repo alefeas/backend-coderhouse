@@ -1,8 +1,7 @@
-
 <h1 class="login-title">Login</h1>
 
 <div class="row container login-form-container">
-    <form class="col s12" action="/session/login" method="post">
+    <form class="col s12" action="/api/session/login" method="post">
         <div class="row">
             <div class="input-field col s12">
                 <input type="email" class="validate" name="email">
@@ -19,7 +18,7 @@
         <input class="waves-effect waves-light btn-small register-submit" type="submit" value="Log in">
     </form>
 </div>
-<div>
-    <a href="/register" class="signup-anchor">Are you new? Sign up!</a>
-    <a href="/session/github"><button>GitHub</button></a>
-</div>
+
+<a href="/api/session/github"><button class="waves-effect waves-light btn-small github-login">Sign in with Github</button></a>
+
+<a href="/register" class="signup-anchor">Are you new? Sign up!</a>
