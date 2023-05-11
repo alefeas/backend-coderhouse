@@ -28,7 +28,7 @@
                 <p class="price-tag">${{price}}</p>
                 {{#if thumbnails}}
                     <div class="thumbnail-container">
-                        <img src="../../statics/img/{{thumbnails}}" alt="">
+                        <img src="{{thumbnails.[0]}}" alt="">
                     </div>
                 {{else}}
                     <p id="no-image">no image</p>

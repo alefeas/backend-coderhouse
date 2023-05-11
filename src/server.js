@@ -1,6 +1,7 @@
 import express from 'express'
 import { router as apiRouter } from './routers/app.routers.js'
 import { router as viewsRoutes } from './routers/views/views.routes.js'
+import { router as mocksRouter} from './routers/mock/mock.routes.js';
 import path from 'path'
 import { fileURLToPath } from 'url';
 import handlebars from 'express-handlebars'
@@ -28,6 +29,7 @@ app.use(passport.initialize())
 app.use(flash())
 
 //Router
+app.use('/mocks', mocksRouter)
 app.use('/api', apiRouter)
 app.use('/', viewsRoutes)
 
