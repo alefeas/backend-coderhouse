@@ -2,6 +2,7 @@ import express from 'express'
 import { router as apiRouter } from './routers/app.routers.js'
 import { router as viewsRoutes } from './routers/views/views.routes.js'
 import { router as mocksRouter} from './routers/mock/mock.routes.js';
+import { router as loggerRoutes } from './routers/logger/logger.routes.js';
 import path from 'path'
 import { fileURLToPath } from 'url';
 import handlebars from 'express-handlebars'
@@ -12,6 +13,7 @@ import { logGreen, logCyan, logRed } from './utils/console.utils.js'
 import flash from 'connect-flash'
 import cookieParser from 'cookie-parser'
 import { ENV_CONFIG } from './config/enviroment.config.js'
+import { addLogger } from './middlewares/logger.middleware.js';
 
 const app = express()
 
@@ -27,8 +29,10 @@ app.use(cookieParser())
 initializePassport()
 app.use(passport.initialize())
 app.use(flash())
+app.use(addLogger)
 
 //Router
+app.use('/loggerTest', loggerRoutes)
 app.use('/mocks', mocksRouter)
 app.use('/api', apiRouter)
 app.use('/', viewsRoutes)
